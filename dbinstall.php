@@ -1,18 +1,7 @@
 <?php
-require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/db.php';
 
-$pdo = new PDO(
-    "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
-    DB_USER,
-    DB_PASS
-);
+$sql = file_get_contents(__DIR__ . '/db.sql');
+$pdo->exec($sql);
 
-$pdo->exec("
-    CREATE TABLE todos (
-        id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        done TINYINT(1) NOT NULL DEFAULT 0
-    )
-");
-
-echo 'Tábla létrehozva!';
+echo 'Tábla létrehozva';
